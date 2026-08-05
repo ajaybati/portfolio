@@ -1551,7 +1551,7 @@
       // title zooms in + fades as the showreel slides over it
       if(title){
         var cover = clamp(window.scrollY / (vh * 0.9));
-        title.style.transform = 'translateY(' + (-cover * vh * 0.18) + 'px) scale(' + (1 + smooth(cover) * 0.38) + ')';
+        title.style.transform = 'translateY(' + (-cover * vh * 0.13) + 'px) scale(' + (1 + smooth(cover) * 0.24) + ')';
         title.style.opacity = String(1 - cover * 0.95);
       }
       chapters.forEach(function(ch, i){
@@ -1571,19 +1571,19 @@
         if(media){
           // pull into focus: small + soft on entry, sharp at full size when pinned
           media.style.transform =
-            'translateY(' + ((1 - eIn) * vh * 0.20 - tOut * vh * 0.09) + 'px)' +
-            ' scale(' + (0.74 + 0.26 * eIn) + ')';
-          media.style.filter = 'blur(' + ((1 - eIn) * 10).toFixed(2) + 'px)';
+            'translateY(' + ((1 - eIn) * vh * 0.12 - tOut * vh * 0.05) + 'px)' +
+            ' scale(' + (0.86 + 0.14 * eIn) + ')';
+          media.style.filter = 'blur(' + ((1 - eIn) * 5).toFixed(2) + 'px)';
           // the camera keeps pushing into the clip while the slide is on screen
           media.querySelectorAll('video').forEach(function(v){
-            v.style.transform = 'scale(' + (1 + eIn * 0.08 + smooth(tOut) * 0.2) + ')';
+            v.style.transform = 'scale(' + (1 + eIn * 0.04 + smooth(tOut) * 0.1) + ')';
           });
         }
         if(info){
           // text arrives noticeably later than the media — bigger parallax gap
           info.style.transform =
-            'translateY(' + ((1 - eIn) * vh * 0.42 - tOut * vh * 0.04) + 'px)' +
-            ' scale(' + (0.9 + 0.1 * eIn) + ')';
+            'translateY(' + ((1 - eIn) * vh * 0.24 - tOut * vh * 0.03) + 'px)' +
+            ' scale(' + (0.95 + 0.05 * eIn) + ')';
           info.style.opacity = String(clamp(tIn * 1.4) * (1 - tOut * 0.9));
           if(head){
             head.style.transform = info.style.transform;
@@ -1592,13 +1592,13 @@
           // facts cascade in one by one as the slide settles
           var items = info.querySelectorAll('.ch-facts li');
           items.forEach(function(li, k){
-            var st = 0.45 + k * 0.14;
+            var st = 0.4 + k * 0.1;
             var tf = clamp((tIn - st) / (1 - st));
             li.style.opacity = String(0.1 + 0.9 * smooth(tf));
-            li.style.transform = 'translateY(' + ((1 - smooth(tf)) * 26) + 'px)';
+            li.style.transform = 'translateY(' + ((1 - smooth(tf)) * 14) + 'px)';
           });
         }
-        ch.style.filter = tOut > 0 ? 'brightness(' + (1 - tOut * 0.3) + ')' : '';
+        ch.style.filter = tOut > 0 ? 'brightness(' + (1 - tOut * 0.18) + ')' : '';
       });
     }
     function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(update); } }
