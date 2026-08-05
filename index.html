@@ -1469,10 +1469,32 @@
     var title = document.querySelector('.slide-title .t-inner');
     var chapters = Array.prototype.slice.call(document.querySelectorAll('.chapter'));
     var ticking = false;
+    var mobileMq = window.matchMedia('(max-width: 860px)');
+    var cleared = false;
     function clamp(v){ return v < 0 ? 0 : (v > 1 ? 1 : v); }
     function smooth(t){ return t * t * (3 - 2 * t); } // smoothstep easing
+    // phones get the plain slide deck: no parallax, no zoom, no blur
+    function clearFx(){
+      if(cleared) return; cleared = true;
+      if(title){ title.style.transform = ''; title.style.opacity = ''; }
+      chapters.forEach(function(ch){
+        ch.style.filter = '';
+        var m = ch.querySelector('[data-para="media"]');
+        var inf = ch.querySelector('[data-para="info"]');
+        if(m){
+          m.style.transform = ''; m.style.filter = '';
+          m.querySelectorAll('video').forEach(function(v){ v.style.transform = ''; });
+        }
+        if(inf){
+          inf.style.transform = ''; inf.style.opacity = '';
+          inf.querySelectorAll('.ch-facts li').forEach(function(li){ li.style.opacity = ''; li.style.transform = ''; });
+        }
+      });
+    }
     function update(){
       ticking = false;
+      if(mobileMq.matches){ clearFx(); return; }
+      cleared = false;
       var vh = window.innerHeight;
       // title zooms in + fades as the showreel slides over it
       if(title){
