@@ -620,7 +620,7 @@
   .reel.over{
     padding-top:clamp(48px,7vw,84px);padding-bottom:clamp(48px,7vw,84px);
     box-shadow:0 -24px 60px rgba(33,30,26,.10);
-    background:#FBF9F4; /* lighter than the page — sections alternate from here */
+    background:var(--surface); /* darker shade — alternation starts at the reel */
   }
   /* tighter bento: shorter rows so the whole cluster sits close to one screen */
   .reel.over .row-hero,
@@ -636,8 +636,8 @@
     box-shadow:0 -28px 70px rgba(33,30,26,.14);
     overflow:hidden;
   }
-  .chapter:nth-of-type(odd){background:var(--bg);} /* page tone */
-  .chapter:nth-of-type(even){background:#FBF9F4;}     /* lighter tone */
+  .chapter:nth-of-type(odd){background:var(--bg);}      /* light */
+  .chapter:nth-of-type(even){background:var(--surface);} /* darker */
   .ch-inner{
     height:100%;max-width:var(--maxw);margin:0 auto;
     padding:calc(56px + 2vh) var(--pad) 4vh;
@@ -734,12 +734,10 @@
 
   @media (max-width:860px){
     .chapter,.rest,.reel.over{box-shadow:none;} /* no curtain gradients on mobile */
-    .chapter{background:var(--bg);}  /* uniform tone for the story chapters */
-    /* the 60-second reel gets its own vibe: a whisper of teal */
+    /* the 60-second reel: a hand-drawn dashed edge, top and bottom */
     .reel.over{
-      background:#EAF1ED;
-      border-top:1px solid rgba(17,94,89,.16);
-      border-bottom:1px solid rgba(17,94,89,.16);
+      border-top:2px dashed rgba(33,30,26,.35);
+      border-bottom:2px dashed rgba(33,30,26,.35);
     }
     /* phones: sections size to content — identical breathing room on every section */
     .chapter{position:relative;height:auto;min-height:0;overflow:visible;}
