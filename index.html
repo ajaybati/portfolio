@@ -620,7 +620,7 @@
   .reel.over{
     padding-top:clamp(48px,7vw,84px);padding-bottom:clamp(48px,7vw,84px);
     box-shadow:0 -24px 60px rgba(33,30,26,.10);
-    background:var(--surface); /* darker shade — alternation starts at the reel */
+    background:#EAE5D8; /* darker warm shade — alternation starts at the reel */
   }
   /* tighter bento: shorter rows so the whole cluster sits close to one screen */
   .reel.over .row-hero,
@@ -637,7 +637,7 @@
     overflow:hidden;
   }
   .chapter:nth-of-type(odd){background:var(--bg);}      /* light */
-  .chapter:nth-of-type(even){background:var(--surface);} /* darker */
+  .chapter:nth-of-type(even){background:#EAE5D8;} /* darker */
   .ch-inner{
     height:100%;max-width:var(--maxw);margin:0 auto;
     padding:calc(56px + 2vh) var(--pad) 4vh;
@@ -734,11 +734,6 @@
 
   @media (max-width:860px){
     .chapter,.rest,.reel.over{box-shadow:none;} /* no curtain gradients on mobile */
-    /* the 60-second reel: a hand-drawn dashed edge, top and bottom */
-    .reel.over{
-      border-top:2px dashed rgba(33,30,26,.35);
-      border-bottom:2px dashed rgba(33,30,26,.35);
-    }
     /* phones: sections size to content — identical breathing room on every section */
     .chapter{position:relative;height:auto;min-height:0;overflow:visible;}
     .ch-inner{
