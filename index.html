@@ -717,7 +717,20 @@
     padding:clamp(48px,7vw,84px) 0 0;
   }
 
+  /* below 1080px the tile labels sit under each clip: the hover hint is
+     meaningless there, and the descriptions read better in the body face */
+  @media (max-width:1080px){
+    .reel-sub span{display:none;}
+    .reel-stage.annotated .label{margin-top:8px!important;}
+    .reel-stage.annotated .lab-desc{
+      margin-top:2px;font-family:var(--body);font-size:.88rem;
+      line-height:1.45;letter-spacing:0;
+    }
+    .reel-stage.annotated .unit{margin-bottom:20px;}
+  }
+
   @media (max-width:860px){
+    .chapter,.rest,.reel.over{box-shadow:none;} /* no curtain gradients on mobile */
     .ch-inner{
       grid-template-columns:1fr;grid-template-rows:auto auto auto;
       grid-template-areas:"head" "media" "info";
@@ -844,7 +857,7 @@
     <div class="reel-head">
       <span class="eyebrow">Selected work <span class="dot">/</span> the 60-second version</span>
       <h2 class="reel-title">Five contact-rich tasks, learned and run on real arms.</h2>
-      <p class="reel-sub">Every clip is a real policy rollout on bimanual ARX5 hardware. <span>Hover a clip to see what makes it hard; click through for the how.</span></p>
+      <p class="reel-sub">Every clip is a real policy rollout on bimanual ARX5 hardware. <span>Hover a clip to see what makes it hard.</span></p>
       <p class="credit">Work done @ Mundane</p>
     </div>
 
