@@ -589,6 +589,11 @@
     transition:opacity .22s ease,transform .22s ease;
   }
   .hover-pop:hover img{opacity:1;transform:translateX(-50%) translateY(0) rotate(-2deg);}
+  /* pop-below variant: for the title, the photo drops under the word instead */
+  .hover-pop.pop-below img{bottom:auto;top:calc(100% + 14px);transform:translateX(-50%) translateY(-8px) rotate(2deg);}
+  .hover-pop.pop-below:hover img{transform:translateX(-50%) translateY(0) rotate(2deg);}
+  .slide-title .hover-pop{border-bottom:none;} /* the .u underline is already the affordance */
+  .slide-title .hover-pop img{width:min(240px,56vw);}
   @media (max-width:720px){
     .t-about{grid-template-columns:1fr;gap:20px;}
   }
@@ -794,7 +799,7 @@
 <!-- SLIDE 0 : TITLE + ABOUT -->
 <section class="slide-title" id="about" aria-label="about ajay">
   <div class="t-inner" data-para="title">
-    <h1>about <span class="u">ajay</span></h1>
+    <h1>about <span class="u hover-pop pop-below">ajay<img src="media/face.jpg" alt="Ajay" loading="lazy"></span></h1>
     <p class="t-sub">Robot manipulation, on real hardware &mdash; a story in five chapters</p>
     <div class="t-about">
       <div class="t-bio">
