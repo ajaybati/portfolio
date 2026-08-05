@@ -596,6 +596,13 @@
   .slide-title .hover-pop img{width:min(240px,56vw);}
   @media (max-width:720px){
     .t-about{grid-template-columns:1fr;gap:20px;}
+    /* phones: title slide flows normally (no pin, no clip) so the
+       stacked bio + links always fit; the cue lives in bottom padding */
+    .slide-title{
+      position:relative;height:auto;min-height:100svh;
+      padding-top:72px;padding-bottom:64px;overflow:visible;
+    }
+    .slide-title .scroll-cue{display:none;}
   }
   .scroll-cue{
     position:absolute;bottom:84px;left:50%;transform:translateX(-50%);
