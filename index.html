@@ -735,12 +735,16 @@
   @media (max-width:860px){
     .chapter,.rest,.reel.over{box-shadow:none;} /* no curtain gradients on mobile */
     .chapter,.reel.over{background:var(--bg);}  /* uniform tone; rule + marker cue sections */
+    /* phones: sections size to content — identical breathing room on every section */
+    .chapter{position:relative;height:auto;min-height:0;overflow:visible;}
     .ch-inner{
       grid-template-columns:1fr;grid-template-rows:auto auto auto;
       grid-template-areas:"head" "media" "info";
       align-content:start;row-gap:18px;column-gap:0;
-      padding-top:20px;
+      height:auto;padding-top:20px;padding-bottom:34px;
     }
+    /* epilogue has one grid item — kill the empty rows' phantom gaps */
+    .ch-inner.ch-solo{grid-template-rows:auto;row-gap:0;padding-top:28px;}
     .ch-head{align-self:auto;display:flex;flex-direction:column-reverse;}
     .ch-head h2{margin-bottom:4px;}
     .ch-head .eyebrow{margin-bottom:0;}
