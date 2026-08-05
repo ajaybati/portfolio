@@ -635,13 +635,19 @@
     box-shadow:0 -28px 70px rgba(33,30,26,.14);
     overflow:hidden;
   }
-  .chapter:nth-of-type(even){background:var(--surface);}
+  .chapter:nth-of-type(odd){background:#F7F4ED;}   /* a touch lighter than the page */
+  .chapter:nth-of-type(even){background:#E8E3D5;}  /* clearly darker, same warm family */
   .ch-inner{
     height:100%;max-width:var(--maxw);margin:0 auto;
     padding:calc(56px + 2vh) var(--pad) 4vh;
-    display:grid;grid-template-columns:1.35fr .9fr;gap:clamp(28px,4.5vw,64px);
-    align-items:center;
+    display:grid;grid-template-columns:1.35fr .9fr;
+    grid-template-rows:auto auto;grid-template-areas:"media head" "media info";
+    column-gap:clamp(28px,4.5vw,64px);row-gap:0;
+    align-content:center;
   }
+  .ch-head{grid-area:head;align-self:end;will-change:transform,opacity;min-width:0;transform-origin:left center;}
+  .ch-media{grid-area:media;align-self:center;}
+  .ch-info{grid-area:info;align-self:start;}
   .ch-media{display:flex;flex-direction:column;gap:14px;justify-content:center;min-width:0;
     will-change:transform,filter;transform-origin:50% 50%;}
   .ch-frame{
@@ -658,7 +664,8 @@
   .ch-frame.portrait video{width:auto;max-width:100%;height:74svh;}
   .ch-frame.half.portrait video{height:38svh;width:auto;}
   .ch-links{display:flex;gap:24px;flex-wrap:wrap;}
-  .ch-inner.ch-solo{grid-template-columns:1fr;max-width:820px;}
+  .ch-inner.ch-solo{grid-template-columns:1fr;grid-template-areas:none;max-width:820px;}
+  .ch-inner.ch-solo .ch-info{grid-area:auto;align-self:center;}
   .chapter-end .ch-facts li{padding-top:14px;padding-bottom:14px;}
   .chapter-end .ch-facts li b{color:var(--ink);font-weight:600;}
   .ch-frame{position:relative;}
@@ -675,8 +682,8 @@
   }
 
   .ch-info{will-change:transform,opacity;min-width:0;transform-origin:left center;}
-  .ch-info .eyebrow{display:block;margin-bottom:14px;}
-  .ch-info h2{
+  .ch-info .eyebrow,.ch-head .eyebrow{display:block;margin-bottom:14px;}
+  .ch-info h2,.ch-head h2{
     font-family:var(--display);font-weight:600;letter-spacing:-.015em;
     font-size:clamp(1.7rem,3.4vw,2.6rem);line-height:1.08;margin:0 0 16px;
   }
@@ -712,9 +719,15 @@
 
   @media (max-width:860px){
     .ch-inner{
-      grid-template-columns:1fr;align-items:start;align-content:center;
-      gap:20px;padding-top:calc(52px + 2vh);
+      grid-template-columns:1fr;grid-template-rows:auto auto auto;
+      grid-template-areas:"head" "media" "info";
+      align-content:center;row-gap:18px;column-gap:0;
+      padding-top:calc(52px + 2vh);
     }
+    .ch-head{align-self:auto;display:flex;flex-direction:column-reverse;}
+    .ch-head h2{margin-bottom:4px;}
+    .ch-head .eyebrow{margin-bottom:0;}
+    .ch-info{align-self:auto;}
     .ch-frame video{max-height:44svh;}
     /* two stacked frames (ch4) must leave room for the info + link below */
     .ch-frame.half{width:min(100%,calc(18svh * 16 / 9));}
@@ -902,6 +915,10 @@
   <section class="chapter" id="ch-data" style="z-index:3">
     <span class="ch-num">01 / 05</span>
     <div class="ch-inner">
+      <div class="ch-head" data-para="head">
+        <span class="eyebrow">Chapter 01 <span class="dot">/</span> Where it all starts</span>
+        <h2>Collect the right data</h2>
+      </div>
       <div class="ch-media" data-para="media">
         <div class="ch-frame">
           <span class="speed-tag">1.5&times;</span>
@@ -910,8 +927,6 @@
         <p class="frame-cap">data collection &middot; teleoperated demonstrations, bimanual ARX5</p>
       </div>
       <div class="ch-info" data-para="info">
-        <span class="eyebrow">Chapter 01 <span class="dot">/</span> Where it all starts</span>
-        <h2>Collect the right data</h2>
         <p class="ch-lede">Every policy in this story starts here: teleoperated demonstrations on bimanual arms. Getting this part right &mdash; synchronized cameras, latency-compensated timestamps, the right control behavior &mdash; decides what a policy can ever learn.</p>
         <ul class="ch-facts">
           <li>Every camera lands within half a frame of one shared observation timestamp</li>
@@ -927,6 +942,10 @@
   <section class="chapter" id="ch-screw" style="z-index:4">
     <span class="ch-num">02 / 05</span>
     <div class="ch-inner">
+      <div class="ch-head" data-para="head">
+        <span class="eyebrow">Chapter 02 <span class="dot">/</span> Prove the pipeline</span>
+        <h2>Screw sorting</h2>
+      </div>
       <div class="ch-media" data-para="media">
         <div class="ch-frame">
           <span class="speed-tag">1.5&times;</span>
@@ -935,8 +954,6 @@
         <p class="frame-cap">screw sorting &middot; real rollout, no teleop, no cuts</p>
       </div>
       <div class="ch-info" data-para="info">
-        <span class="eyebrow">Chapter 02 <span class="dot">/</span> Prove the pipeline</span>
-        <h2>Screw sorting</h2>
         <p class="ch-lede">The first proof that the whole pipeline holds up &mdash; data in, policy out, running on real arms. Screws of mixed sizes, sorted into bins by size &mdash; about 20 per minute, hands-off. Once it worked, the same rig became a testbed for going further.</p>
         <ul class="ch-facts">
           <li>Data &rarr; training &rarr; deployment, validated end to end</li>
@@ -955,6 +972,10 @@
   <section class="chapter" id="ch-inferslide" style="z-index:5">
     <span class="ch-num">03 / 05</span>
     <div class="ch-inner">
+      <div class="ch-head" data-para="head">
+        <span class="eyebrow">Chapter 03 <span class="dot">/</span> Make it run smoothly</span>
+        <h2>Real-time inference</h2>
+      </div>
       <div class="ch-media" data-para="media">
         <div class="ch-frame portrait">
           <span class="speed-tag">1&times;</span>
@@ -963,8 +984,6 @@
         <p class="frame-cap">box packing &middot; a pack of cards into a slot</p>
       </div>
       <div class="ch-info" data-para="info">
-        <span class="eyebrow">Chapter 03 <span class="dot">/</span> Make it run smoothly</span>
-        <h2>Real-time inference</h2>
         <p class="ch-lede">A working policy isn&rsquo;t enough &mdash; it has to keep moving. The system predicts a chunk of actions, executes part of it, and replans; the smoothing work lives in the seams between chunks. Box packing shows the payoff: a pack of cards slid into a tight slot, smoothly, without stutter.</p>
         <ul class="ch-facts">
           <li>Receding horizon: predict a chunk, execute a bit, replan</li>
@@ -980,6 +999,10 @@
   <section class="chapter" id="ch-reactivity" style="z-index:6">
     <span class="ch-num">04 / 05</span>
     <div class="ch-inner">
+      <div class="ch-head" data-para="head">
+        <span class="eyebrow">Chapter 04 <span class="dot">/</span> The extra module: memory</span>
+        <h2>Memory as reactivity</h2>
+      </div>
       <div class="ch-media" data-para="media">
         <div class="ch-frame half">
           <span class="speed-tag">1&times;</span>
@@ -992,8 +1015,6 @@
         <p class="frame-cap">pill singulation &middot; baggie insertion</p>
       </div>
       <div class="ch-info" data-para="info">
-        <span class="eyebrow">Chapter 04 <span class="dot">/</span> The extra module: memory</span>
-        <h2>Memory as reactivity</h2>
         <p class="ch-lede">With the stack proven, the work I&rsquo;m most invested in: long-context memory. These tasks aren&rsquo;t Markovian &mdash; the current frame alone doesn&rsquo;t determine the right action. Long context is what makes a policy <em>reactive</em>: it acts on what has already happened, not just what it sees right now.</p>
         <ul class="ch-facts">
           <li>Non-Markovian: the right action depends on history, not the current frame</li>
@@ -1009,6 +1030,10 @@
   <section class="chapter" id="ch-visual" style="z-index:7">
     <span class="ch-num">05 / 05</span>
     <div class="ch-inner">
+      <div class="ch-head" data-para="head">
+        <span class="eyebrow">Chapter 05 <span class="dot">/</span> Memory, part two</span>
+        <h2>Memory as visual cues</h2>
+      </div>
       <div class="ch-media" data-para="media">
         <div class="ch-frame">
           <span class="speed-tag">1&times;</span>
@@ -1017,8 +1042,6 @@
         <p class="frame-cap">memory button &middot; the answer isn&rsquo;t in the frame</p>
       </div>
       <div class="ch-info" data-para="info">
-        <span class="eyebrow">Chapter 05 <span class="dot">/</span> Memory, part two</span>
-        <h2>Memory as visual cues</h2>
         <p class="ch-lede">The other half of memory is visual: which button is correct depends on the color of a peg the robot saw earlier &mdash; nothing in the current frame gives it away. Two situations look identical; long visual context is what breaks the tie.</p>
         <ul class="ch-facts">
           <li>Perceptual aliasing: identical frames, different answers</li>
@@ -1488,6 +1511,8 @@
         ch.style.filter = '';
         var m = ch.querySelector('[data-para="media"]');
         var inf = ch.querySelector('[data-para="info"]');
+        var hd = ch.querySelector('[data-para="head"]');
+        if(hd){ hd.style.transform = ''; hd.style.opacity = ''; }
         if(m){
           m.style.transform = ''; m.style.filter = '';
           m.querySelectorAll('video').forEach(function(v){ v.style.transform = ''; });
@@ -1522,6 +1547,7 @@
         var eIn = smooth(tIn);
         var media = ch.querySelector('[data-para="media"]');
         var info  = ch.querySelector('[data-para="info"]');
+        var head  = ch.querySelector('[data-para="head"]');
         if(media){
           // pull into focus: small + soft on entry, sharp at full size when pinned
           media.style.transform =
@@ -1539,6 +1565,10 @@
             'translateY(' + ((1 - eIn) * vh * 0.42 - tOut * vh * 0.04) + 'px)' +
             ' scale(' + (0.9 + 0.1 * eIn) + ')';
           info.style.opacity = String(clamp(tIn * 1.4) * (1 - tOut * 0.9));
+          if(head){
+            head.style.transform = info.style.transform;
+            head.style.opacity = info.style.opacity;
+          }
           // facts cascade in one by one as the slide settles
           var items = info.querySelectorAll('.ch-facts li');
           items.forEach(function(li, k){
