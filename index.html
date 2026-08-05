@@ -734,11 +734,12 @@
 
   @media (max-width:860px){
     .chapter,.rest,.reel.over{box-shadow:none;} /* no curtain gradients on mobile */
+    .chapter,.reel.over{background:var(--bg);}  /* uniform tone; rule + marker cue sections */
     .ch-inner{
       grid-template-columns:1fr;grid-template-rows:auto auto auto;
       grid-template-areas:"head" "media" "info";
       align-content:start;row-gap:18px;column-gap:0;
-      padding-top:60px;
+      padding-top:20px;
     }
     .ch-head{align-self:auto;display:flex;flex-direction:column-reverse;}
     .ch-head h2{margin-bottom:4px;}
@@ -753,7 +754,14 @@
     .ch-info h2{font-size:1.5rem;margin-bottom:10px;}
     .ch-lede{margin-bottom:12px;font-size:.92rem;}
     .chapter:not(.chapter-end) .ch-facts{display:none;} /* keep slides small on phones */
-    .ch-num{display:none;}
+    .ch-num{
+      position:static;display:flex;align-items:center;gap:9px;
+      padding:26px var(--pad) 0;
+    }
+    .ch-num::before{
+      content:"";width:9px;height:9px;flex:none;
+      border:1.5px solid var(--signal);border-radius:2px;
+    }
   }
   /* --- detail drawer (chapter "go deeper" side panel) --- */
   .drawer-backdrop{
