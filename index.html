@@ -735,15 +735,12 @@
   @media (max-width:860px){
     .chapter,.rest,.reel.over{box-shadow:none;} /* no curtain gradients on mobile */
     .chapter{background:var(--bg);}  /* uniform tone for the story chapters */
-    /* the 60-second reel gets its own vibe: dark ink band, clips pop */
-    .reel.over{background:#1D1B17;border-top:none;}
-    .reel.over .reel-title{color:#F4F1EA;}
-    .reel.over .reel-sub{color:rgba(244,241,234,.72);}
-    .reel.over .eyebrow{color:rgba(244,241,234,.55);}
-    .reel.over .credit{color:rgba(244,241,234,.5);}
-    .reel.over .lab-name{color:#F4F1EA;}
-    .reel.over .lab-desc{color:rgba(244,241,234,.62);}
-    .reel.over .media{border-color:rgba(244,241,234,.16);}
+    /* the 60-second reel gets its own vibe: a whisper of teal */
+    .reel.over{
+      background:#EAF1ED;
+      border-top:1px solid rgba(17,94,89,.16);
+      border-bottom:1px solid rgba(17,94,89,.16);
+    }
     /* phones: sections size to content — identical breathing room on every section */
     .chapter{position:relative;height:auto;min-height:0;overflow:visible;}
     .ch-inner{
